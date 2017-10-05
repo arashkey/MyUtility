@@ -1,136 +1,149 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: MyUtility.ExtendStringBuilder
-// Assembly: MyUtility, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9de928c05a3c751e
-// MVID: 59ECCB6B-F93C-42F8-9F4A-1BDFB8E4814F
-// Assembly location: F:\_pro_\AspNetMVC\MyWork\AtlasAmar\AtlasAmar\AtlasAmar\Helpers\MyUtility.dll
-
-using log4net;
-using System;
+﻿using System;
 using System.Globalization;
-using System.Reflection;
 using System.Text;
 
 namespace MyUtility
 {
-  public static class ExtendStringBuilder
-  {
-    private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-
-    public static int IndexOf(this StringBuilder sb, string value, int startIndex = 0, bool ignoreCase = false)
+    public static class ExtendStringBuilder
     {
-      if (sb == null)
-        throw new ArgumentNullException(nameof (sb));
-      if (startIndex == -1)
-        startIndex = sb.Length - 1;
-      if (startIndex >= sb.Length)
-        throw new ArgumentException("startIndex must be lower than sb.Lengh");
-      int length = value.Length;
-      int num = sb.Length - length + 1;
-      if (ignoreCase)
-      {
-        for (int index1 = startIndex; index1 < num; ++index1)
+        //private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+        /// <summary>
+        /// Returns the index of the start of the contents in a StringBuilder
+        /// </summary>
+        /// <param name="sb">string builder parameter</param>
+        /// <param name="value">The string to find</param>
+        /// <param name="startIndex">The starting index.</param>
+        /// <param name="ignoreCase">if set to <c>true</c> it will ignore case</param>
+        /// <returns></returns>
+        public static int IndexOf(this StringBuilder sb, string value, int startIndex = 0, bool ignoreCase = false)
         {
-          if (char.ToLower(sb[index1]) == char.ToLower(value[0]))
-          {
-            int index2 = 1;
-            while (index2 < length && char.ToLower(sb[index1 + index2]) == char.ToLower(value[index2]))
-              ++index2;
-            if (index2 == length)
-              return index1;
-          }
+            if (sb == null) throw new ArgumentNullException(nameof(sb));
+            if (startIndex == -1) startIndex = sb.Length - 1;
+            if (startIndex >= sb.Length) throw new ArgumentException("startIndex must be lower than sb.Lengh");
+            int index;
+            int length = value.Length;
+            int maxSearchLength = (sb.Length - length) + 1;
+
+            if (ignoreCase)
+            {
+                for (int i = startIndex; i < maxSearchLength; ++i)
+                {
+                    if (Char.ToLower(sb[i]) == Char.ToLower(value[0]))
+                    {
+                        index = 1;
+                        while ((index < length) && (Char.ToLower(sb[i + index]) == Char.ToLower(value[index])))
+                            ++index;
+
+                        if (index == length)
+                            return i;
+                    }
+                }
+
+                return -1;
+            }
+
+            for (int i = startIndex; i < maxSearchLength; ++i)
+            {
+                if (sb[i] == value[0])
+                {
+                    index = 1;
+                    while ((index < length) && (sb[i + index] == value[index]))
+                        ++index;
+
+                    if (index == length)
+                        return i;
+                }
+            }
+
+            return -1;
         }
-        return -1;
-      }
-      for (int index1 = startIndex; index1 < num; ++index1)
-      {
-        if (sb[index1] == value[0])
+
+        public static int LastIndexOf(this StringBuilder sb, char find, bool ignoreCase = false, int startIndex = 0, CultureInfo culture = null)
         {
-          int index2 = 1;
-          while (index2 < length && sb[index1 + index2] == value[index2])
-            ++index2;
-          if (index2 == length)
-            return index1;
-        }
-      }
-      return -1;
-    }
+            if (sb == null) throw new ArgumentNullException(nameof(sb));
+            if (startIndex == -1) startIndex = sb.Length - 1;
+            if (startIndex >= sb.Length) throw new ArgumentException("startIndex must be lower than sb.Lengh");
+            if (culture == null) culture = CultureInfo.InvariantCulture;
 
-    public static int LastIndexOf(this StringBuilder sb, char find, bool ignoreCase = false, int startIndex = 0, CultureInfo culture = null)
-    {
-      if (sb == null)
-        throw new ArgumentNullException(nameof (sb));
-      if (startIndex == -1)
-        startIndex = sb.Length - 1;
-      if (startIndex >= sb.Length)
-        throw new ArgumentException("startIndex must be lower than sb.Lengh");
-      if (culture == null)
-        culture = CultureInfo.InvariantCulture;
-      int num = -1;
-      if (ignoreCase)
-        find = char.ToUpper(find, culture);
-      for (int index = startIndex; index >= 0; --index)
-      {
-        char ch = ignoreCase ? char.ToUpper(sb[index], culture) : sb[index];
-        if (find == ch)
+            int lastIndex = -1;
+            if (ignoreCase) find = Char.ToUpper(find, culture);
+            for (int i = startIndex; i >= 0; i--)
+            {
+                var c = ignoreCase ? Char.ToUpper(sb[i], culture) : sb[i];
+                if (find == c)
+                {
+                    lastIndex = i;
+                    break;
+                }
+            }
+            return lastIndex;
+        }
+        public static int LastIndexOf(this StringBuilder sb, string find, bool ignoreCase = false, int startIndex = 0, CultureInfo culture = null)
         {
-          num = index;
-          break;
-        }
-      }
-      return num;
-    }
+            if (sb == null || sb.Length == 0) throw new ArgumentNullException(nameof(sb));
+            if (startIndex == 0) startIndex = sb.Length - find.Length;
+            if (startIndex >= sb.Length) throw new ArgumentException("startIndex must be lower than sb.Lengh");
+            if (culture == null) culture = CultureInfo.InvariantCulture;
+           // int len = sb.Length;
 
-    public static int LastIndexOf(this StringBuilder sb, string find, bool ignoreCase = false, int startIndex = 0, CultureInfo culture = null)
-    {
-      if (sb == null || sb.Length == 0)
-        throw new ArgumentNullException(nameof (sb));
-      if (startIndex == 0)
-        startIndex = sb.Length - find.Length;
-      if (startIndex >= sb.Length)
-        throw new ArgumentException("startIndex must be lower than sb.Lengh");
-      if (culture == null)
-        culture = CultureInfo.InvariantCulture;
-      int length = sb.Length;
-      if (ignoreCase)
-        find = find.ToUpper(culture);
-      for (int index1 = startIndex; index1 >= 0; --index1)
-      {
-        char ch = ignoreCase ? char.ToUpper(sb[index1], culture) : sb[index1];
-        if (find[0] == ch)
+            if (ignoreCase) find = find.ToUpper(culture);
+            for (int i = startIndex; i >= 0; i--)
+            {
+                var c = ignoreCase ? Char.ToUpper(sb[i], culture) : (sb[i]);
+                if (find[0] == c)
+                {
+                    var j = 0;
+                    while (j < find.Length && find[j] == sb[i + j])
+                    {
+                        j++;
+                    }
+                    if (j == find.Length)
+                        return i;
+                }
+            }
+            return -1;
+        }
+        public static int IndexOf(StringBuilder sb, char ch)
         {
-          int index2 = 0;
-          while (index2 < find.Length && find[index2] == sb[index1 + index2])
-            ++index2;
-          if (index2 == find.Length)
-            return index1;
+            int intVal1 = -1;
+
+            while (++intVal1 < sb.Length)
+            {
+                if (sb[intVal1] == ch)
+                {
+                    return intVal1;
+                }
+            }
+            return -1;
         }
-      }
-      return -1;
-    }
 
-    public static int IndexOf(StringBuilder sb, char ch)
-    {
-      int index = -1;
-      while (++index < sb.Length)
-      {
-        if (sb[index] == ch)
-          return index;
-      }
-      return -1;
-    }
+        public static StringBuilder Substring(this StringBuilder str, int startIndex, int len = -1)
+        {
+            if (startIndex < 0)
+            {
+                throw new ArgumentOutOfRangeException(
+                    $@"The start index are smaller than 0!");
+            }
 
-    public static StringBuilder Substring(this StringBuilder str, int startIndex, int len = -1)
-    {
-      if (startIndex < 0)
-        throw new ArgumentOutOfRangeException("The start index are smaller than 0!");
-      if (startIndex >= str.Length)
-        throw new ArgumentOutOfRangeException("The start index is bigger than string length!");
-      StringBuilder stringBuilder = new StringBuilder();
-      if (len == -1)
-        len = str.Length;
-      for (int index = startIndex; index < len; ++index)
-        stringBuilder.Append(str[index]);
-      return stringBuilder;
+            if (startIndex >= str.Length)
+            {
+                throw new ArgumentOutOfRangeException(
+                    $"The start index is bigger than string length!");
+            }
+
+            StringBuilder sb = new StringBuilder();
+            if (len == -1)
+            {
+                len = str.Length;
+            }
+            for (int i = startIndex; i < len; i++)
+            {
+                sb.Append(str[i]);
+            }
+
+            return sb;
+        }
+
     }
-  }
 }

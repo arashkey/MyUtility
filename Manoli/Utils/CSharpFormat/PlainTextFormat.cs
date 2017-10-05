@@ -10,59 +10,29 @@ namespace Manoli.Utils.CSharpFormat
 {
   public class PlainTextFormat : CodeFormat
   {
-    public override bool CaseSensitive
-    {
-      get
-      {
-        return false;
-      }
-    }
+    public override bool CaseSensitive => false;
 
-    protected override string CommentRegEx
-    {
-      get
-      {
-        return "";
-      }
-    }
+      protected override string CommentRegEx => "";
 
-    protected override string StringRegEx
-    {
-      get
-      {
-        return "";
-      }
-    }
+      protected override string StringRegEx => "";
 
-    protected override string Keywords
-    {
-      get
-      {
-        return "";
-      }
-    }
+      protected override string Keywords => "";
 
-    protected override string Preprocessors
-    {
-      get
-      {
-        return "";
-      }
-    }
+      protected override string Preprocessors => "";
 
-    private string FormatCode(string source, bool lineNumbers, bool alternate, bool embedStyleSheet, bool subCode)
+      private string FormatCode(string source, bool lineNumbers, bool alternate, bool embedStyleSheet, bool subCode)
     {
       StringBuilder stringBuilder1 = new StringBuilder(source);
       stringBuilder1.Replace("&", "&amp;");
       stringBuilder1.Replace("<", "&lt;");
       stringBuilder1.Replace(">", "&gt;");
-      stringBuilder1.Replace("\t", string.Empty.PadRight(this.TabSpaces));
+      stringBuilder1.Replace("\t", string.Empty.PadRight(TabSpaces));
       source = stringBuilder1.ToString();
       StringBuilder stringBuilder2 = new StringBuilder();
       if (embedStyleSheet)
       {
         stringBuilder2.Append("<style type=\"text/css\">\n");
-        stringBuilder2.Append(SourceFormat.GetCssString());
+        stringBuilder2.Append(GetCssString());
         stringBuilder2.Append("</style>\n");
       }
       if (!subCode)

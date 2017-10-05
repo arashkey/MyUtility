@@ -11,16 +11,18 @@ namespace Cyotek.Web.BbCodeFormatter
 {
   internal class LineBreaksFormatter : IHtmlFormatter
   {
-    private string[] _exclusionCodes;
-    private List<IHtmlFormatter> _formatters;
+    private readonly string[] _exclusionCodes;
+    private readonly List<IHtmlFormatter> _formatters;
 
     public LineBreaksFormatter(string[] exclusionCodes)
     {
-      this._exclusionCodes = exclusionCodes;
-      this._formatters = new List<IHtmlFormatter>();
-      this._formatters.Add(new SearchReplaceFormatter("\r", ""));
-      this._formatters.Add(new SearchReplaceFormatter("\n\n", "</p><p>"));
-      this._formatters.Add(new SearchReplaceFormatter("\n", "<br />"));
+      _exclusionCodes = exclusionCodes;
+        _formatters = new List<IHtmlFormatter>
+        {
+            new SearchReplaceFormatter("\r", ""),
+            new SearchReplaceFormatter("\n\n", "</p><p>"),
+            new SearchReplaceFormatter("\n", "<br />")
+        };
     }
 
     public string Format(string data)
@@ -29,19 +31,18 @@ namespace Cyotek.Web.BbCodeFormatter
       int nextBlockStart;
       do
       {
-        string matchedTag;
-        nextBlockStart = this.GetNextBlockStart(num, data, out matchedTag);
+          nextBlockStart = GetNextBlockStart(num, data, out var matchedTag);
         string data1 = nextBlockStart == -1 ? (num == -1 || num >= data.Length ? null : data.Substring(num)) : data.Substring(num, nextBlockStart - num);
         if (data1 != null)
         {
           int length = data1.Length;
-          foreach (IHtmlFormatter formatter in this._formatters)
+          foreach (IHtmlFormatter formatter in _formatters)
             data1 = formatter.Format(data1);
           if (nextBlockStart != -1)
           {
             data = data.Substring(0, num) + data1 + data.Substring(nextBlockStart);
             nextBlockStart += data1.Length - length;
-            num = this.GetBlockEnd(nextBlockStart, data, matchedTag);
+            num = GetBlockEnd(nextBlockStart, data, matchedTag);
           }
           else
             data = data.Substring(0, num) + data1;
@@ -53,7 +54,7 @@ namespace Cyotek.Web.BbCodeFormatter
 
     private int GetBlockEnd(int startingPosition, string data, string tag)
     {
-      string str = string.Format("[/{0}]", tag);
+      string str = $"[/{tag}]";
       int num = data.IndexOf(str, startingPosition, StringComparison.InvariantCultureIgnoreCase);
       if (num == -1)
         num = data.Length;
@@ -64,9 +65,9 @@ namespace Cyotek.Web.BbCodeFormatter
     {
       int num1 = -1;
       matchedTag = null;
-      foreach (string exclusionCode in this._exclusionCodes)
+      foreach (string exclusionCode in _exclusionCodes)
       {
-        string str = string.Format("[{0}]", exclusionCode);
+        string str = $"[{exclusionCode}]";
         int num2 = data.IndexOf(str, startingPosition, StringComparison.InvariantCultureIgnoreCase);
         if (num2 > -1 && (num2 < num1 || num1 == -1))
         {

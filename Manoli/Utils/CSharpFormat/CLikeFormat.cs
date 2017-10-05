@@ -8,20 +8,8 @@ namespace Manoli.Utils.CSharpFormat
 {
   public abstract class CLikeFormat : CodeFormat
   {
-    protected override string CommentRegEx
-    {
-      get
-      {
-        return "/\\*.*?\\*/|//.*?(?=\\r|\\n)";
-      }
-    }
+    protected override string CommentRegEx => "/\\*.*?\\*/|//.*?(?=\\r|\\n)";
 
-    protected override string StringRegEx
-    {
-      get
-      {
-        return "@?\"\"|@?\".*?(?!\\\\).\"|''|'.*?(?!\\\\).'";
-      }
-    }
+      protected override string StringRegEx => "@?\"\"|@?\".*?(?!\\\\).\"|''|'.*?(?!\\\\).'";
   }
 }

@@ -14,34 +14,22 @@ namespace Manoli.Utils.CSharpFormat
   {
     protected abstract string Keywords { get; }
 
-    protected virtual string Preprocessors
-    {
-      get
-      {
-        return "";
-      }
-    }
+    protected virtual string Preprocessors => "";
 
-    protected abstract string StringRegEx { get; }
+      protected abstract string StringRegEx { get; }
 
     protected abstract string CommentRegEx { get; }
 
-    public virtual bool CaseSensitive
-    {
-      get
-      {
-        return true;
-      }
-    }
+    public virtual bool CaseSensitive => true;
 
-    protected CodeFormat()
+      protected CodeFormat()
     {
-      string str1 = this.Keywords.Replace("\r\n", " ");
+      string str1 = Keywords.Replace("\r\n", " ");
       Regex regex1 = new Regex("\\w+|-\\w+|#\\w+|@@\\w+|#(?:\\\\(?:s|w)(?:\\*|\\+)?\\w+)+|@\\\\w\\*+");
       string input1 = str1;
       string replacement1 = "(?<=^|\\W)$0(?=\\W)";
       string str2 = regex1.Replace(input1, replacement1);
-      string preprocessors = this.Preprocessors;
+      string preprocessors = Preprocessors;
       string replacement2 = "(?<=^|\\s)$0(?=\\s|$)";
       string str3 = regex1.Replace(preprocessors, replacement2);
       Regex regex2 = new Regex(" +");
@@ -55,9 +43,9 @@ namespace Manoli.Utils.CSharpFormat
         str5 = "(?!.*)_{37}(?<!.*)";
       StringBuilder stringBuilder = new StringBuilder();
       stringBuilder.Append("(");
-      stringBuilder.Append(this.CommentRegEx);
+      stringBuilder.Append(CommentRegEx);
       stringBuilder.Append(")|(");
-      stringBuilder.Append(this.StringRegEx);
+      stringBuilder.Append(StringRegEx);
       if (str5.Length > 0)
       {
         stringBuilder.Append(")|(");
@@ -66,8 +54,8 @@ namespace Manoli.Utils.CSharpFormat
       stringBuilder.Append(")|(");
       stringBuilder.Append(str4);
       stringBuilder.Append(")");
-      RegexOptions regexOptions = this.CaseSensitive ? RegexOptions.None : RegexOptions.IgnoreCase;
-      this.CodeRegex = new Regex(stringBuilder.ToString(), RegexOptions.Singleline | regexOptions);
+      RegexOptions regexOptions = CaseSensitive ? RegexOptions.None : RegexOptions.IgnoreCase;
+      CodeRegex = new Regex(stringBuilder.ToString(), RegexOptions.Singleline | regexOptions);
     }
 
     protected override string MatchEval(Match match)

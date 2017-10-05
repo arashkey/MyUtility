@@ -10,18 +10,18 @@ namespace Cyotek.Web.BbCodeFormatter
 {
   public static class PlainTextProcessor
   {
-    private static List<IHtmlFormatter> _formatters = new List<IHtmlFormatter>();
+    private static readonly List<IHtmlFormatter> _formatters = new List<IHtmlFormatter>();
 
     static PlainTextProcessor()
     {
-      PlainTextProcessor._formatters.Add(new SearchReplaceFormatter("\r", ""));
-      PlainTextProcessor._formatters.Add(new SearchReplaceFormatter("\n\n", "</p><p>"));
-      PlainTextProcessor._formatters.Add(new SearchReplaceFormatter("\n", "<br />"));
+      _formatters.Add(new SearchReplaceFormatter("\r", ""));
+      _formatters.Add(new SearchReplaceFormatter("\n\n", "</p><p>"));
+      _formatters.Add(new SearchReplaceFormatter("\n", "<br />"));
     }
 
     public static string Format(string data)
     {
-      foreach (IHtmlFormatter formatter in PlainTextProcessor._formatters)
+      foreach (IHtmlFormatter formatter in _formatters)
         data = formatter.Format(data);
       return "<p>" + data + "</p>";
     }

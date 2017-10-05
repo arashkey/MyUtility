@@ -11,7 +11,7 @@ namespace Manoli.Utils.CSharpFormat
     public static SourceFormat Create(SourceLanguages Language)
     {
       if (Language == SourceLanguages.CSharp)
-        return new Manoli.Utils.CSharpFormat.CSharpFormat();
+        return new CSharpFormat();
       if (Language == SourceLanguages.Html)
         return new HtmlFormat();
       if (Language == SourceLanguages.VisualBasic)
@@ -31,34 +31,22 @@ namespace Manoli.Utils.CSharpFormat
     {
       Language = Language.ToLower();
       if (Language == "c#" || Language == "csharp")
-        return Manoli.Utils.CSharpFormat.CSharpFormat.Create(SourceLanguages.CSharp);
+        return Create(SourceLanguages.CSharp);
       if (Language == "html" || Language == "xml")
-        return Manoli.Utils.CSharpFormat.CSharpFormat.Create(SourceLanguages.Html);
+        return Create(SourceLanguages.Html);
       if (Language == "javascript" || Language == "jscript")
-        return Manoli.Utils.CSharpFormat.CSharpFormat.Create(SourceLanguages.JavaScript);
+        return Create(SourceLanguages.JavaScript);
       if (Language == "vb" || Language == "vb.net" || (Language == "visualbasic" || Language == "visual basic"))
-        return Manoli.Utils.CSharpFormat.CSharpFormat.Create(SourceLanguages.VisualBasic);
+        return Create(SourceLanguages.VisualBasic);
       if (Language == "sql" || Language == "tsql")
-        return Manoli.Utils.CSharpFormat.CSharpFormat.Create(SourceLanguages.TSql);
+        return Create(SourceLanguages.TSql);
       if (Language == "fox" || Language == "vfp" || Language == "foxpro")
-        return Manoli.Utils.CSharpFormat.CSharpFormat.Create(SourceLanguages.FoxPro);
-      return Manoli.Utils.CSharpFormat.CSharpFormat.Create(SourceLanguages.PlainText);
+        return Create(SourceLanguages.FoxPro);
+      return Create(SourceLanguages.PlainText);
     }
 
-    protected override string Keywords
-    {
-      get
-      {
-        return "abstract as base bool break byte case catch char \r\nchecked class const continue decimal default delegate do double else\r\nenum event explicit extern false finally fixed float for foreach goto \r\nif implicit in int into interface internal is lock long namespace new null\r\nobject operator out override partial params private protected public readonly\r\nref return sbyte sealed select short sizeof stackalloc static string struct\r\nswitch this throw true try typeof uint ulong unchecked unsafe ushort\r\nusing value var virtual void volatile where while yield";
-      }
-    }
+    protected override string Keywords => "abstract as base bool break byte case catch char \r\nchecked class const continue decimal default delegate do double else\r\nenum event explicit extern false finally fixed float for foreach goto \r\nif implicit in int into interface internal is lock long namespace new null\r\nobject operator out override partial params private protected public readonly\r\nref return sbyte sealed select short sizeof stackalloc static string struct\r\nswitch this throw true try typeof uint ulong unchecked unsafe ushort\r\nusing value var virtual void volatile where while yield";
 
-    protected override string Preprocessors
-    {
-      get
-      {
-        return "#if #else #elif #endif #define #undef #warning #error #line #region #endregion #pragma";
-      }
-    }
+      protected override string Preprocessors => "#if #else #elif #endif #define #undef #warning #error #line #region #endregion #pragma";
   }
 }

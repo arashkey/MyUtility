@@ -76,7 +76,6 @@
     <Compile Include="MyUtility\Mail.cs" />
     <Compile Include="MyUtility\Number2String.cs" />
     <Compile Include="MyUtility\Web.cs" />
-    <Compile Include="MyUtility\IpInfo.cs" />
     <Compile Include="MyUtility\String.cs" />
     <Compile Include="MyUtility\Security\User.cs" />
     <Compile Include="MyUtility\Banking\ParsianBank.cs" />

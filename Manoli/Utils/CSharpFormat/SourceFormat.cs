@@ -22,58 +22,34 @@ namespace Manoli.Utils.CSharpFormat
 
     protected SourceFormat()
     {
-      this._tabSpaces = 4;
-      this._lineNumbers = false;
-      this._alternate = false;
-      this._embedStyleSheet = false;
+      _tabSpaces = 4;
+      _lineNumbers = false;
+      _alternate = false;
+      _embedStyleSheet = false;
     }
 
     public byte TabSpaces
     {
-      get
-      {
-        return this._tabSpaces;
-      }
-      set
-      {
-        this._tabSpaces = value;
-      }
+      get => _tabSpaces;
+        set => _tabSpaces = value;
     }
 
     public bool LineNumbers
     {
-      get
-      {
-        return this._lineNumbers;
-      }
-      set
-      {
-        this._lineNumbers = value;
-      }
+      get => _lineNumbers;
+        set => _lineNumbers = value;
     }
 
     public bool Alternate
     {
-      get
-      {
-        return this._alternate;
-      }
-      set
-      {
-        this._alternate = value;
-      }
+      get => _alternate;
+        set => _alternate = value;
     }
 
     public bool EmbedStyleSheet
     {
-      get
-      {
-        return this._embedStyleSheet;
-      }
-      set
-      {
-        this._embedStyleSheet = value;
-      }
+      get => _embedStyleSheet;
+        set => _embedStyleSheet = value;
     }
 
     public string FormatCode(Stream source)
@@ -81,17 +57,17 @@ namespace Manoli.Utils.CSharpFormat
       StreamReader streamReader = new StreamReader(source);
       string end = streamReader.ReadToEnd();
       streamReader.Close();
-      return this.FormatCode(end, this._lineNumbers, this._alternate, this._embedStyleSheet, false);
+      return FormatCode(end, _lineNumbers, _alternate, _embedStyleSheet, false);
     }
 
     public string FormatCode(string source)
     {
-      return this.FormatCode(source, this._lineNumbers, this._alternate, this._embedStyleSheet, false);
+      return FormatCode(source, _lineNumbers, _alternate, _embedStyleSheet, false);
     }
 
     public string FormatSubCode(string source)
     {
-      return this.FormatCode(source, false, false, false, true);
+      return FormatCode(source, false, false, false, true);
     }
 
     public static Stream GetCssStream()
@@ -101,19 +77,13 @@ namespace Manoli.Utils.CSharpFormat
 
     public static string GetCssString()
     {
-      return new StreamReader(SourceFormat.GetCssStream()).ReadToEnd();
+      return new StreamReader(GetCssStream()).ReadToEnd();
     }
 
     protected Regex CodeRegex
     {
-      get
-      {
-        return this.codeRegex;
-      }
-      set
-      {
-        this.codeRegex = value;
-      }
+      get => codeRegex;
+        set => codeRegex = value;
     }
 
     protected abstract string MatchEval(Match match);
@@ -126,14 +96,14 @@ namespace Manoli.Utils.CSharpFormat
         stringBuilder1.Replace("&", "&amp;");
         stringBuilder1.Replace("<", "&lt;");
         stringBuilder1.Replace(">", "&gt;");
-        stringBuilder1.Replace("\t", string.Empty.PadRight(this._tabSpaces));
+        stringBuilder1.Replace("\t", string.Empty.PadRight(_tabSpaces));
       }
-      source = this.codeRegex.Replace(stringBuilder1.ToString(), new MatchEvaluator(this.MatchEval));
+      source = codeRegex.Replace(stringBuilder1.ToString(), new MatchEvaluator(MatchEval));
       StringBuilder stringBuilder2 = new StringBuilder();
       if (embedStyleSheet)
       {
         stringBuilder2.Append("<style type=\"text/css\">\n");
-        stringBuilder2.Append(SourceFormat.GetCssString());
+        stringBuilder2.Append(GetCssString());
         stringBuilder2.Append("</style>\n");
       }
       if (lineNumbers | alternate)

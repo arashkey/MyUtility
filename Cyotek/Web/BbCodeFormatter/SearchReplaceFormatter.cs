@@ -8,18 +8,18 @@ namespace Cyotek.Web.BbCodeFormatter
 {
   internal class SearchReplaceFormatter : IHtmlFormatter
   {
-    private string _pattern;
-    private string _replace;
+    private readonly string _pattern;
+    private readonly string _replace;
 
     public SearchReplaceFormatter(string pattern, string replace)
     {
-      this._pattern = pattern;
-      this._replace = replace;
+      _pattern = pattern;
+      _replace = replace;
     }
 
     public string Format(string data)
     {
-      return data.Replace(this._pattern, this._replace);
+      return data.Replace(_pattern, _replace);
     }
   }
 }

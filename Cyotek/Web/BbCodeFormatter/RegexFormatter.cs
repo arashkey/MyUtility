@@ -10,8 +10,8 @@ namespace Cyotek.Web.BbCodeFormatter
 {
   internal class RegexFormatter : IHtmlFormatter
   {
-    private Regex _regex;
-    private string _replace;
+    private readonly Regex _regex;
+    private readonly string _replace;
 
     public RegexFormatter(string pattern, string replace)
       : this(pattern, replace, true)
@@ -23,29 +23,17 @@ namespace Cyotek.Web.BbCodeFormatter
       RegexOptions options = RegexOptions.Compiled;
       if (ignoreCase)
         options |= RegexOptions.IgnoreCase;
-      this._replace = replace;
-      this._regex = new Regex(pattern, options);
+      _replace = replace;
+      _regex = new Regex(pattern, options);
     }
 
     public virtual string Format(string data)
     {
-      return this._regex.Replace(data, this._replace);
+      return _regex.Replace(data, _replace);
     }
 
-    protected Regex Regex
-    {
-      get
-      {
-        return this._regex;
-      }
-    }
+    protected Regex Regex => _regex;
 
-    protected string Replace
-    {
-      get
-      {
-        return this._replace;
-      }
-    }
+      protected string Replace => _replace;
   }
 }

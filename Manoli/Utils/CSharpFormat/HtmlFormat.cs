@@ -12,16 +12,16 @@ namespace Manoli.Utils.CSharpFormat
 {
   public class HtmlFormat : SourceFormat
   {
-    private Manoli.Utils.CSharpFormat.CSharpFormat csf;
-    private JavaScriptFormat jsf;
-    private Regex attribRegex;
+    private readonly CSharpFormat csf;
+    private readonly JavaScriptFormat jsf;
+    private readonly Regex attribRegex;
 
     public HtmlFormat()
     {
-      this.CodeRegex = new Regex("((?<=&lt;script(?:\\s.*?)?&gt;).+?(?=&lt;/script&gt;))|(&lt;!--.*?--&gt;)|(&lt;%@.*?%&gt;|&lt;%|%&gt;)|((?<=&lt;%).*?(?=%&gt;))|((?:&lt;/?!?\\??(?!%)|(?<!%)/?&gt;)+)|((?<=&lt;/?!?\\??(?!%))[\\w\\.:-]+(?=.*&gt;))|((?<=&lt;(?!%)/?!?\\??[\\w:-]+).*?(?=(?<!%)/?&gt;))|(&amp;\\w+;)", RegexOptions.IgnoreCase | RegexOptions.Singleline);
-      this.attribRegex = new Regex("(=?\".*?\"|=?'.*?')|([\\w:-]+)", RegexOptions.Singleline);
-      this.csf = new Manoli.Utils.CSharpFormat.CSharpFormat();
-      this.jsf = new JavaScriptFormat();
+      CodeRegex = new Regex("((?<=&lt;script(?:\\s.*?)?&gt;).+?(?=&lt;/script&gt;))|(&lt;!--.*?--&gt;)|(&lt;%@.*?%&gt;|&lt;%|%&gt;)|((?<=&lt;%).*?(?=%&gt;))|((?:&lt;/?!?\\??(?!%)|(?<!%)/?&gt;)+)|((?<=&lt;/?!?\\??(?!%))[\\w\\.:-]+(?=.*&gt;))|((?<=&lt;(?!%)/?!?\\??[\\w:-]+).*?(?=(?<!%)/?&gt;))|(&amp;\\w+;)", RegexOptions.IgnoreCase | RegexOptions.Singleline);
+      attribRegex = new Regex("(=?\".*?\"|=?'.*?')|([\\w:-]+)", RegexOptions.Singleline);
+      csf = new CSharpFormat();
+      jsf = new JavaScriptFormat();
     }
 
     private string AttributeMatchEval(Match match)
@@ -38,7 +38,7 @@ namespace Manoli.Utils.CSharpFormat
       if (match.Groups[1].Success)
       {
         match.ToString();
-        return this.jsf.FormatSubCode(match.ToString());
+        return jsf.FormatSubCode(match.ToString());
       }
       if (match.Groups[2].Success)
       {
@@ -58,13 +58,13 @@ namespace Manoli.Utils.CSharpFormat
       if (match.Groups[3].Success)
         return "<span class=\"asp\">" + match.ToString() + "</span>";
       if (match.Groups[4].Success)
-        return this.csf.FormatSubCode(match.ToString());
+        return csf.FormatSubCode(match.ToString());
       if (match.Groups[5].Success)
         return "<span class=\"kwrd\">" + match.ToString() + "</span>";
       if (match.Groups[6].Success)
         return "<span class=\"html\">" + match.ToString() + "</span>";
       if (match.Groups[7].Success)
-        return this.attribRegex.Replace(match.ToString(), new MatchEvaluator(this.AttributeMatchEval));
+        return attribRegex.Replace(match.ToString(), new MatchEvaluator(AttributeMatchEval));
       if (match.Groups[8].Success)
         return "<span class=\"attr\">" + match.ToString() + "</span>";
       return match.ToString();

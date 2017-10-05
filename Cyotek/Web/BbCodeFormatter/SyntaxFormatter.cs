@@ -12,7 +12,7 @@ namespace Cyotek.Web.BbCodeFormatter
 {
   internal class SyntaxFormatter : RegexFormatter
   {
-    private SourceFormat _formatter;
+    private readonly SourceFormat _formatter;
 
     public SyntaxFormatter(SourceFormat formatter, string pattern, string replace)
       : this(formatter, pattern, replace, true)
@@ -22,17 +22,17 @@ namespace Cyotek.Web.BbCodeFormatter
     public SyntaxFormatter(SourceFormat formatter, string pattern, string replace, bool ignoreCase)
       : base(pattern, replace, ignoreCase)
     {
-      this._formatter = formatter;
+      _formatter = formatter;
     }
 
     public override string Format(string data)
     {
-      return this.Regex.Replace(data, new MatchEvaluator(this.SyntaxMatcher));
+      return Regex.Replace(data, new MatchEvaluator(SyntaxMatcher));
     }
 
     private string SyntaxMatcher(Match match)
     {
-      return match.Result(string.Format(this.Replace, this._formatter.FormatCode(HttpUtility.HtmlDecode(match.Groups[1].Value))));
+      return match.Result(string.Format(Replace, _formatter.FormatCode(HttpUtility.HtmlDecode(match.Groups[1].Value))));
     }
   }
 }

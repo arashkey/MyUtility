@@ -15,29 +15,29 @@ namespace MyUtility.Banking
     public const string PAYMENTURL = "https://pec.shaparak.ir/pecpaymentgateway/default.aspx?au=";
     public const int MAXVALIDTIME = 10;
 
-    public static string GetStatusMessage(ParsianBank.StatusBankResult statusBankResult)
+    public static string GetStatusMessage(StatusBankResult statusBankResult)
     {
       switch (statusBankResult)
       {
-        case ParsianBank.StatusBankResult.SaleIsAlreadyDoneSuccessfully:
+        case StatusBankResult.SaleIsAlreadyDoneSuccessfully:
           return "عمليات قبلا با موفقيت انجام شده است";
-        case ParsianBank.StatusBankResult.InvalidMerchantOrder:
+        case StatusBankResult.InvalidMerchantOrder:
           return "شماره تراکنش فروشنده درست نميباشد";
-        case ParsianBank.StatusBankResult.Successful:
+        case StatusBankResult.Successful:
           return "موفق";
-        case ParsianBank.StatusBankResult.PreRequest:
+        case StatusBankResult.PreRequest:
           return "وضعيت بلا تكليف";
-        case ParsianBank.StatusBankResult.AccessViolation:
-        case ParsianBank.StatusBankResult.MerchantAuthenticationFailed:
+        case StatusBankResult.AccessViolation:
+        case StatusBankResult.MerchantAuthenticationFailed:
           return "پين  یا فروشنده درست نميباشد";
-        case ParsianBank.StatusBankResult.IpIsWrong:
+        case StatusBankResult.IpIsWrong:
           return "آی پی سرور اشتباه است";
         default:
           return "پیام دیگری از سرور بازگشت داده شده است با کد";
       }
     }
 
-    public static ParsianBank.StatusBankResult GetStatusType(byte status)
+    public static StatusBankResult GetStatusType(byte status)
     {
       if (status <= 1U)
       {
@@ -58,9 +58,9 @@ namespace MyUtility.Banking
             goto label_4;
         }
       }
-      return (ParsianBank.StatusBankResult) status;
+      return (StatusBankResult) status;
 label_4:
-      return ParsianBank.StatusBankResult.Other;
+      return StatusBankResult.Other;
     }
 
     public enum StatusBankResult
