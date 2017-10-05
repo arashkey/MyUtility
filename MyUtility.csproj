@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--Project was exported from assembly: F:\_pro_\AspNetMVC\MyWork\AtlasAmar\AtlasAmar\AtlasAmar\Helpers\MyUtility.dll-->
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F596A222-FAD7-4F99-AA3E-026C0304EB19}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>MyUtility</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <ApplicationVersion>1.0.0.0</ApplicationVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\AspNetMVC\MyWork\AtlasAmar\AtlasAmar\packages\log4net.2.0.8\lib\net35-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Configuration" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Manoli\Utils\CSharpFormat\CLikeFormat.cs" />
+    <Compile Include="Manoli\Utils\CSharpFormat\CodeFormat.cs" />
+    <Compile Include="Manoli\Utils\CSharpFormat\CSharpFormat.cs" />
+    <Compile Include="Manoli\Utils\CSharpFormat\SourceLanguages.cs" />
+    <Compile Include="Manoli\Utils\CSharpFormat\FoxProFormat.cs" />
+    <Compile Include="Manoli\Utils\CSharpFormat\HtmlFormat.cs" />
+    <Compile Include="Manoli\Utils\CSharpFormat\JavaScriptFormat.cs" />
+    <Compile Include="Manoli\Utils\CSharpFormat\MshFormat.cs" />
+    <Compile Include="Manoli\Utils\CSharpFormat\PlainTextFormat.cs" />
+    <Compile Include="Manoli\Utils\CSharpFormat\SourceFormat.cs" />
+    <Compile Include="Manoli\Utils\CSharpFormat\TsqlFormat.cs" />
+    <Compile Include="Manoli\Utils\CSharpFormat\ViewSourceControl.cs" />
+    <Compile Include="Manoli\Utils\CSharpFormat\DisplayStates.cs" />
+    <Compile Include="Manoli\Utils\CSharpFormat\VisualBasicFormat.cs" />
+    <Compile Include="Cyotek\Web\BbCodeFormatter\BbCodeProcessor.cs" />
+    <Compile Include="Cyotek\Web\BbCodeFormatter\IHtmlFormatter.cs" />
+    <Compile Include="Cyotek\Web\BbCodeFormatter\LineBreaksFormatter.cs" />
+    <Compile Include="Cyotek\Web\BbCodeFormatter\PlainTextProcessor.cs" />
+    <Compile Include="Cyotek\Web\BbCodeFormatter\RegexFormatter.cs" />
+    <Compile Include="Cyotek\Web\BbCodeFormatter\SearchReplaceFormatter.cs" />
+    <Compile Include="Cyotek\Web\BbCodeFormatter\SyntaxFormatter.cs" />
+    <Compile Include="MyUtility\Basic.cs" />
+    <Compile Include="MyUtility\Data.cs" />
+    <Compile Include="MyUtility\Date.cs" />
+    <Compile Include="MyUtility\ExceptionReport.cs" />
+    <Compile Include="MyUtility\ExtendStringBuilder.cs" />
+    <Compile Include="MyUtility\Folder.cs" />
+    <Compile Include="MyUtility\Mail.cs" />
+    <Compile Include="MyUtility\Number2String.cs" />
+    <Compile Include="MyUtility\Web.cs" />
+    <Compile Include="MyUtility\IpInfo.cs" />
+    <Compile Include="MyUtility\String.cs" />
+    <Compile Include="MyUtility\Security\User.cs" />
+    <Compile Include="MyUtility\Banking\ParsianBank.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="MyUtility.snk" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="log4net.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
