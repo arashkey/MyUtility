@@ -30,6 +30,8 @@ namespace Cyotek.Web.BbCodeFormatter
             _formatters.Add(new RegexFormatter("\\[tr(?:\\s*)\\]((.|\\n)*?)\\[/tr(?:\\s*)\\]", "<tr>$1</tr>"));
             _formatters.Add(new RegexFormatter("\\[td(?:\\s*)\\]((.|\\n)*?)\\[/td(?:\\s*)\\]", "<td>$1</td>"));
             _formatters.Add(new RegexFormatter("\\[table(?:\\s*)\\]((.|\\n)*?)\\[/table(?:\\s*)\\]", "<table>$1</table>"));
+            _formatters.Add(new RegexFormatter("\\[chart(?:\\s*)\\]((.|\\n)*?)\\[/chart(?:\\s*)\\]", "<iframe src=\"/ShowChart/Charts/$1\" style=\"border:0 none;\" class=\"chartFrame\" > </iframe>")); 
+
             _formatters.Add(new RegexFormatter("\\[i(?:\\s*)\\]((.|\\n)*?)\\[/i(?:\\s*)\\]", "<em>$1</em>"));
             _formatters.Add(new RegexFormatter("\\[s(?:\\s*)\\]((.|\\n)*?)\\[/s(?:\\s*)\\]", "<strike>$1</strike>"));
             _formatters.Add(new RegexFormatter("\\[u(?:\\s*)\\]((.|\\n)*?)\\[/u(?:\\s*)\\]", "<u>$1</u>"));
@@ -85,7 +87,6 @@ namespace Cyotek.Web.BbCodeFormatter
             _formatters.Add(new RegexFormatter("\\[/quote(?:\\s*)\\]", "</p></div>"));
 
             _formatters.Add(new RegexFormatter("\\[url(?:\\s*)\\]www\\.(.*?)\\[/url(?:\\s*)\\]", "<a href=\"http://www.$1\" target=\"_blank\" title=\"$1\">$1</a>"));
-            _formatters.Add(new RegexFormatter("\\[chart(?:\\s*)\\]\\.(.*?)\\[/chart(?:\\s*)\\]", "<iframe src=\"/ShowChart/Charts/$1\" style=\"border:0 none;\" class=\"chartFrame\" > </iframe>"));
 
             _formatters.Add(new RegexFormatter("\\[url(?:\\s*)\\]((.|\\n)*?)\\[/url(?:\\s*)\\]", "<a href=\"$1\" target=\"_blank\" title=\"$1\">$1</a>"));
             _formatters.Add(new RegexFormatter("\\[url=\"((.|\\n)*?)(?:\\s*)\"\\]((.|\\n)*?)\\[/url(?:\\s*)\\]", "<a href=\"$1\" target=\"_blank\" title=\"$1\">$3</a>"));
