@@ -27,6 +27,8 @@ namespace Cyotek.Web.BbCodeFormatter
           "php"
             }));
             _formatters.Add(new RegexFormatter("\\[b(?:\\s*)\\]((.|\\n)*?)\\[/b(?:\\s*)\\]", "<strong>$1</strong>"));
+            _formatters.Add(new RegexFormatter("\\[chart(?:\\s*)\\]((.|\\n)*?)\\[/chart(?:\\s*)\\]", "<iframe src=\"/ShowChart/Charts/$1\"  border=\"0\" class=\"chartFrame\" > </iframe>"));
+ 
             _formatters.Add(new RegexFormatter("\\[tr(?:\\s*)\\]((.|\\n)*?)\\[/tr(?:\\s*)\\]", "<tr>$1</tr>"));
             _formatters.Add(new RegexFormatter("\\[td(?:\\s*)\\]((.|\\n)*?)\\[/td(?:\\s*)\\]", "<td>$1</td>"));
             _formatters.Add(new RegexFormatter("\\[table(?:\\s*)\\]((.|\\n)*?)\\[/table(?:\\s*)\\]", "<table>$1</table>"));
@@ -85,7 +87,6 @@ namespace Cyotek.Web.BbCodeFormatter
             _formatters.Add(new RegexFormatter("\\[/quote(?:\\s*)\\]", "</p></div>"));
 
             _formatters.Add(new RegexFormatter("\\[url(?:\\s*)\\]www\\.(.*?)\\[/url(?:\\s*)\\]", "<a href=\"http://www.$1\" target=\"_blank\" title=\"$1\">$1</a>"));
-            _formatters.Add(new RegexFormatter("\\[chart(?:\\s*)\\]\\.(.*?)\\[/chart(?:\\s*)\\]", "<iframe src=\"/ShowChart/Charts/$1\" style=\"border:0 none;\" class=\"chartFrame\" > </iframe>"));
 
             _formatters.Add(new RegexFormatter("\\[url(?:\\s*)\\]((.|\\n)*?)\\[/url(?:\\s*)\\]", "<a href=\"$1\" target=\"_blank\" title=\"$1\">$1</a>"));
             _formatters.Add(new RegexFormatter("\\[url=\"((.|\\n)*?)(?:\\s*)\"\\]((.|\\n)*?)\\[/url(?:\\s*)\\]", "<a href=\"$1\" target=\"_blank\" title=\"$1\">$3</a>"));
@@ -94,6 +95,7 @@ namespace Cyotek.Web.BbCodeFormatter
             _formatters.Add(new RegexFormatter("\\[link=((.|\\n)*?)(?:\\s*)\\]((.|\\n)*?)\\[/link(?:\\s*)\\]", "<a href=\"$1\" target=\"_blank\" title=\"$1\">$3</a>"));
             _formatters.Add(new RegexFormatter("\\[img(?:\\s*)\\]((.|\\n)*?)\\[/img(?:\\s*)\\]", "<img src=\"$1\" border=\"0\" alt=\"\" />"));
             _formatters.Add(new RegexFormatter("\\[img align=((.|\\n)*?)(?:\\s*)\\]((.|\\n)*?)\\[/img(?:\\s*)\\]", "<img src=\"$3\" border=\"0\" align=\"$1\" alt=\"\" />"));
+            _formatters.Add(new RegexFormatter("\\[img width=((.|\\n)*?),height=((.|\\n)*?)(?:\\s*)\\]((.|\\n)*?)\\[/img(?:\\s*)\\]", "<img width=\"$1\" height=\"$3\" src=\"$5\" border=\"0\" alt=\"\" />"));
             _formatters.Add(new RegexFormatter("\\[img=((.|\\n)*?)x((.|\\n)*?)(?:\\s*)\\]((.|\\n)*?)\\[/img(?:\\s*)\\]", "<img width=\"$1\" height=\"$3\" src=\"$5\" border=\"0\" alt=\"\" />"));
             _formatters.Add(new RegexFormatter("\\[color=((.|\\n)*?)(?:\\s*)\\]((.|\\n)*?)\\[/color(?:\\s*)\\]", "<span style=\"color:$1;\">$3</span>"));
             _formatters.Add(new RegexFormatter("\\[highlight(?:\\s*)\\]((.|\\n)*?)\\[/highlight(?:\\s*)]", "<span class=\"bbc-highlight\">$1</span>"));
