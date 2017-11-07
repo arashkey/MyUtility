@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -107,7 +108,24 @@ namespace MyUtility
             }
             catch
             {
-                return -1;
+                try
+                {
+                    return Convert.ToDouble(s,new CultureInfo("en-US"));
+                }
+                catch  
+                {
+
+
+                    try
+                    {
+                        return Convert.ToDouble(s, new CultureInfo("fa-IR"));
+                    }
+                    catch  
+                    {
+
+                        return -1;
+                    }
+                }
             }
         }
 
