@@ -61,6 +61,7 @@ namespace MyUtility
         {
             try
             {
+                s = s.Replace(",", "");
                 return Convert.ToInt64(s);
             }
             catch
@@ -75,8 +76,8 @@ namespace MyUtility
         public static int ToInt(this object s)
         {
             try
-            {
-                string data = s.ToString();
+            { 
+                string data = s.ToString().Replace(",", "");
                 int result = -1;
                 int.TryParse(data, out result);
                 return result;
@@ -104,6 +105,7 @@ namespace MyUtility
         {
             try
             {
+                s = s.Replace(",", "");
                 return Convert.ToDouble(s);
             }
             catch
@@ -165,10 +167,10 @@ namespace MyUtility
         /// <summary>
         /// Compiled regular expression for performance.
         /// </summary>
-        static readonly Regex _htmlRegex = new Regex("<.*?>", RegexOptions.Compiled);
+        static readonly Regex HtmlRegex = new Regex("<.*?>", RegexOptions.Compiled);
         public static string RemoveHtml(this string o)
         {
-            return _htmlRegex.Replace(o, string.Empty);
+            return HtmlRegex.Replace(o, string.Empty);
         }
 
 
@@ -176,7 +178,8 @@ namespace MyUtility
         {
             try
             {
-                return Convert.ToDecimal(s.ToString());
+                s = s.Replace(",", "");
+                return Convert.ToDecimal(s);
             }
             catch
             {
