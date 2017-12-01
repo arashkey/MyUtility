@@ -95,6 +95,11 @@ namespace Cyotek.Web.BbCodeFormatter
             _formatters.Add(new RegexFormatter("\\[url=((.|\\n)*?)(?:\\s*)\\]((.|\\n)*?)\\[/url(?:\\s*)\\]", "<a href=\"$1\" target=\"_blank\" title=\"$1\">$3</a>"));
             _formatters.Add(new RegexFormatter("\\[link(?:\\s*)\\]((.|\\n)*?)\\[/link(?:\\s*)\\]", "<a href=\"$1\" target=\"_blank\" title=\"$1\">$1</a>"));
             _formatters.Add(new RegexFormatter("\\[link=((.|\\n)*?)(?:\\s*)\\]((.|\\n)*?)\\[/link(?:\\s*)\\]", "<a href=\"$1\" target=\"_blank\" title=\"$1\">$3</a>"));
+
+            _formatters.Add(new RegexFormatter("\\[tree(?:\\s*)\\]((.|\\n)*?)\\[/tree(?:\\s*)\\]", "<div id='graph'></div><script>   dTree.init(treeDataParcer('$1'), { target: '#graph',width: document.getElementById('graph').offsetWidth, height: 200}); </script>"));
+            _formatters.Add(new RegexFormatter("\\[tree=((.|\\n)*?)(?:\\s*)\\]((.|\\n)*?)\\[/tree(?:\\s*)\\]", "<style>$1</style> <div id='graph'></div> <script>   dTree.init(treeDataParcer('$3'), { target: '#graph',width: document.getElementById('graph').offsetWidth, height: 200 }); </script>"));
+
+
             _formatters.Add(new RegexFormatter("\\[img(?:\\s*)\\]((.|\\n)*?)\\[/img(?:\\s*)\\]", "<img src=\"$1\" border=\"0\" alt=\"\" />"));
             _formatters.Add(new RegexFormatter("\\[img align=((.|\\n)*?)(?:\\s*)\\]((.|\\n)*?)\\[/img(?:\\s*)\\]", "<img src=\"$3\" border=\"0\" align=\"$1\" alt=\"\" />"));
             _formatters.Add(new RegexFormatter("\\[img width=((.|\\n)*?),height=((.|\\n)*?)(?:\\s*)\\]((.|\\n)*?)\\[/img(?:\\s*)\\]", "<img width=\"$1\" height=\"$3\" src=\"$5\" border=\"0\" alt=\"\" />"));
