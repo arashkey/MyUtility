@@ -4,6 +4,7 @@
 // MVID: 59ECCB6B-F93C-42F8-9F4A-1BDFB8E4814F
 // Assembly location: F:\_pro_\AspNetMVC\MyWork\AtlasAmar\AtlasAmar\AtlasAmar\Helpers\MyUtility.dll
 
+using System;
 using Manoli.Utils.CSharpFormat;
 using System.Collections.Generic;
 
@@ -28,11 +29,11 @@ namespace Cyotek.Web.BbCodeFormatter
             }));
             _formatters.Add(new RegexFormatter("\\[b(?:\\s*)\\]((.|\\n)*?)\\[/b(?:\\s*)\\]", "<strong>$1</strong>"));
             _formatters.Add(new RegexFormatter("\\[chart(?:\\s*)\\]((.|\\n)*?)\\[/chart(?:\\s*)\\]", "<iframe src=\"/ShowChart/Charts/$1\"  border=\"0\" class=\"chartFrame\" > </iframe>"));
- 
+
             _formatters.Add(new RegexFormatter("\\[tr(?:\\s*)\\]((.|\\n)*?)\\[/tr(?:\\s*)\\]", "<tr>$1</tr>"));
             _formatters.Add(new RegexFormatter("\\[td(?:\\s*)\\]((.|\\n)*?)\\[/td(?:\\s*)\\]", "<td>$1</td>"));
             _formatters.Add(new RegexFormatter("\\[table(?:\\s*)\\]((.|\\n)*?)\\[/table(?:\\s*)\\]", "<table>$1</table>"));
-            _formatters.Add(new RegexFormatter("\\[chart(?:\\s*)\\]((.|\\n)*?)\\[/chart(?:\\s*)\\]", "<iframe src=\"/ShowChart/Charts/$1\" style=\"border:0 none;\" class=\"chartFrame\" > </iframe>")); 
+            _formatters.Add(new RegexFormatter("\\[chart(?:\\s*)\\]((.|\\n)*?)\\[/chart(?:\\s*)\\]", "<iframe src=\"/ShowChart/Charts/$1\" style=\"border:0 none;\" class=\"chartFrame\" > </iframe>"));
 
             _formatters.Add(new RegexFormatter("\\[i(?:\\s*)\\]((.|\\n)*?)\\[/i(?:\\s*)\\]", "<em>$1</em>"));
             _formatters.Add(new RegexFormatter("\\[s(?:\\s*)\\]((.|\\n)*?)\\[/s(?:\\s*)\\]", "<strike>$1</strike>"));
@@ -96,8 +97,9 @@ namespace Cyotek.Web.BbCodeFormatter
             _formatters.Add(new RegexFormatter("\\[link(?:\\s*)\\]((.|\\n)*?)\\[/link(?:\\s*)\\]", "<a href=\"$1\" target=\"_blank\" title=\"$1\">$1</a>"));
             _formatters.Add(new RegexFormatter("\\[link=((.|\\n)*?)(?:\\s*)\\]((.|\\n)*?)\\[/link(?:\\s*)\\]", "<a href=\"$1\" target=\"_blank\" title=\"$1\">$3</a>"));
 
-            _formatters.Add(new RegexFormatter("\\[tree(?:\\s*)\\]((.|\\n)*?)\\[/tree(?:\\s*)\\]", "<div id='graph'></div><script>   dTree.init(treeDataParcer('$1'), { target: '#graph',width: document.getElementById('graph').offsetWidth, height: 200}); </script>"));
-            _formatters.Add(new RegexFormatter("\\[tree=((.|\\n)*?)(?:\\s*)\\]((.|\\n)*?)\\[/tree(?:\\s*)\\]", "<style>$1</style> <div id='graph'></div> <script>   dTree.init(treeDataParcer('$3'), { target: '#graph',width: document.getElementById('graph').offsetWidth, height: 200 }); </script>"));
+            var rnd = new Random().Next(int.MaxValue);
+            _formatters.Add(new RegexFormatter("\\[tree(?:\\s*)\\]((.|\\n)*?)\\[/tree(?:\\s*)\\]", "<div id='treegraph" + rnd + "'></div><script>   dTree.init(treeDataParcer('$1'), { target: '#treegraph" + rnd + "',width: document.getElementById('treegraph" + rnd + "').offsetWidth, height: 200}); </script>"));
+            _formatters.Add(new RegexFormatter("\\[tree=((.|\\n)*?)(?:\\s*)\\]((.|\\n)*?)\\[/tree(?:\\s*)\\]", "<style>$1</style> <div id='treegraph" + rnd + "'></div> <script>   dTree.init(treeDataParcer('$3'), { target: '#treegraph" + rnd + "',width: document.getElementById('treegraph" + rnd + "').offsetWidth, height: 200 }); </script>"));
 
 
             _formatters.Add(new RegexFormatter("\\[img(?:\\s*)\\]((.|\\n)*?)\\[/img(?:\\s*)\\]", "<img src=\"$1\" border=\"0\" alt=\"\" />"));
