@@ -98,8 +98,8 @@ namespace Cyotek.Web.BbCodeFormatter
             _formatters.Add(new RegexFormatter("\\[link=((.|\\n)*?)(?:\\s*)\\]((.|\\n)*?)\\[/link(?:\\s*)\\]", "<a href=\"$1\" target=\"_blank\" title=\"$1\">$3</a>"));
 
             var rnd = new Random().Next(int.MaxValue);
-            _formatters.Add(new RegexFormatter("\\[tree(?:\\s*)\\]((.|\\n)*?)\\[/tree(?:\\s*)\\]", "<div id='treegraph" + rnd + "'></div><script>   dTree.init(treeDataParcer('$1'), { target: '#treegraph" + rnd + "',width: document.getElementById('treegraph" + rnd + "').offsetWidth, height: 200}); </script>"));
-            _formatters.Add(new RegexFormatter("\\[tree=((.|\\n)*?)(?:\\s*)\\]((.|\\n)*?)\\[/tree(?:\\s*)\\]", "<style>$1</style> <div id='treegraph" + rnd + "'></div> <script>   dTree.init(treeDataParcer('$3'), { target: '#treegraph" + rnd + "',width: document.getElementById('treegraph" + rnd + "').offsetWidth, height: 200 }); </script>"));
+            _formatters.Add(new RegexFormatter("\\[tree(?:\\s*)\\]((.|\\n)*?)\\[/tree(?:\\s*)\\]", "<div id='treegraph" + rnd + "'></div><script>   dTree.init(treeDataParcer('$1'), { target: '#treegraph" + rnd + "',width: document.getElementById('treegraph" + rnd + "').offsetWidth, height: 300}); </script>"));
+            _formatters.Add(new RegexFormatter("\\[tree=((.|\\n)*?)(?:\\s*)\\]((.|\\n)*?)\\[/tree(?:\\s*)\\]", "<style>$1</style> <div id='treegraph" + rnd + "'></div> <script>   dTree.init(treeDataParcer('$3'), { target: '#treegraph" + rnd + "',width: document.getElementById('treegraph" + rnd + "').offsetWidth, height: 300 }); </script>"));
 
 
             _formatters.Add(new RegexFormatter("\\[img(?:\\s*)\\]((.|\\n)*?)\\[/img(?:\\s*)\\]", "<img src=\"$1\" border=\"0\" alt=\"\" />"));
