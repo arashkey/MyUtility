@@ -8,13 +8,11 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
-using log4net;
 
 namespace MyUtility
 {
     public static class Data
     {
-        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
  
         public static StringBuilder TrimEnd(this StringBuilder s, char ch)
         {

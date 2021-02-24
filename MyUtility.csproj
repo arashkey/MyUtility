@@ -77,21 +77,12 @@
     <Compile Include="MyUtility\Number2String.cs" />
     <Compile Include="MyUtility\Web.cs" />
     <Compile Include="MyUtility\String.cs" />
-    <Compile Include="MyUtility\Security\User.cs" />
     <Compile Include="MyUtility\Banking\ParsianBank.cs" />
     <Compile Include="AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="log4net.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="MyUtility.snk" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="log4net.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

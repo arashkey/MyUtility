@@ -4,14 +4,12 @@
 // MVID: 59ECCB6B-F93C-42F8-9F4A-1BDFB8E4814F
 // Assembly location: F:\_pro_\AspNetMVC\MyWork\AtlasAmar\AtlasAmar\AtlasAmar\Helpers\MyUtility.dll
 
-using log4net;
 using System.Reflection;
 
 namespace MyUtility.Banking
 {
   public static class ParsianBank
   {
-    private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
     public const string PAYMENTURL = "https://pec.shaparak.ir/pecpaymentgateway/default.aspx?au=";
     public const int MAXVALIDTIME = 10;
 

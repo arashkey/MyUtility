@@ -8,10 +8,9 @@ namespace MyUtility
 {
     public static class Mail
     {
-        //private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private static string _smtpUrl = "mail.domaintak.com"
-            , _smtpPort = "25", _email = "info@domaintak.com", _pass = "Password";
+        private static string _smtpUrl = "mail.domain.com"
+            , _smtpPort = "25", _email = "info@domain.com", _pass = "Password";
 
         public static bool SendMail(string to, string subject, string body, bool isBodyHtml, List<Attachment> attachments = null)
         {
@@ -63,13 +62,10 @@ namespace MyUtility
                     message.Attachments.Add(attachment);
                 }
             }
-            //var smtp = new SmtpClient("mail.tajala.com", 25);
             var smtp = new SmtpClient(_smtpUrl, _smtpPort.ToInt());
 
-            //            var smtpUser = new NetworkCredential("support@tajala.com", "6SnaqVjf6TS9iqm");
             var smtpUser = new NetworkCredential(_email, _pass);
 
-            //            smtp.Host = "mail.tajala.com";
             smtp.Host = _smtpUrl;
 
             smtp.DeliveryMethod = SmtpDeliveryMethod.Network;

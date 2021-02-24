@@ -5,22 +5,15 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.IO;
 using System.Reflection;
-using log4net;
-using log4net.Config;
+
 
 namespace MyUtility
 {
     public class ExceptionReport
     {
-         public static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        public const string ConfigFileName = "log4net.config";
 
-        public static void LogConfiguration()
-        {
-            Type type = typeof(ExceptionReport);
-            XmlConfigurator.ConfigureAndWatch(new FileInfo(Path.Combine(Basic.AssemblyDirectory, "log4net.config")));
-            Console.WriteLine("Logger init :{0}", LogManager.GetLogger(type).ToString());
-        }
+
+   
         public static void log(string logString, string ip = "")
         {
             log(new Exception(logString), ip);
