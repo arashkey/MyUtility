@@ -55,12 +55,10 @@ namespace MyUtility.Banking
           case 34:
             break;
           default:
-            goto label_4;
+             return StatusBankResult.Other;
         }
       }
       return (StatusBankResult) status;
-label_4:
-      return StatusBankResult.Other;
     }
 
     public enum StatusBankResult
