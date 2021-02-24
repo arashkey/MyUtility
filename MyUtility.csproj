@@ -70,6 +70,7 @@
     <Compile Include="MyUtility\ExceptionReport.cs" />
     <Compile Include="MyUtility\ExtendStringBuilder.cs" />
     <Compile Include="MyUtility\Folder.cs" />
+    <Compile Include="MyUtility\LogManager.cs" />
     <Compile Include="MyUtility\Mail.cs" />
     <Compile Include="MyUtility\Number2String.cs" />
     <Compile Include="MyUtility\Web.cs" />
